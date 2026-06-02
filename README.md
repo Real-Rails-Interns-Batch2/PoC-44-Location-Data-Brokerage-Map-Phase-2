@@ -243,13 +243,44 @@ uvicorn main:app --reload
 
 # Environment Variables
 
-See `.env.example`
+# Frontend
+
+NEXT_PUBLIC_APP_NAME=Location Data Brokerage Map
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# Optional Public Source APIs
+
+OPEN_SECRETS_API_KEY=
+CFPB_API_BASE=https://www.consumerfinance.gov/data-research/
+
+# Backend
+
+FASTAPI_ENV=development
+PORT=8000
+
+# Database
+
+DATABASE_URL=sqlite:///./location_brokerage.db
+
+# ETL
+
+ENABLE_SYNTHETIC_DATA=true
+ENABLE_REAL_SOURCE_MERGE=true
+
+# Export Controls
+
+ENABLE_LINEAGE_DOWNLOAD=true
+ENABLE_SAMPLE_EXPORTS=true
+
+# Analytics
+
+ENABLE_USAGE_ANALYTICS=false
+
+# Security
+
+CORS_ORIGINS=http://localhost:3000
+
 
 ---
 
-# Disclaimer
-
-This project is an educational and analytical demonstration built for the Real Rails Intelligence Library.
-
-Some entity relationships and transaction flows are synthetic and exist solely to illustrate structural dynamics within the location-data brokerage ecosystem.
 
