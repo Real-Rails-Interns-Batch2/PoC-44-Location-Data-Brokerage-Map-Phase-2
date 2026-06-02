@@ -1,0 +1,18 @@
+export const EDGES = [
+  { id: "R001", source: "E005", target: "E001", type: "data_feed", volume_tb_monthly: 320, contract_type: "revenue_share", label: "Bid-stream + background GPS" },
+  { id: "R002", source: "E005", target: "E002", type: "data_feed", volume_tb_monthly: 210, contract_type: "revenue_share", label: "Raw location pings" },
+  { id: "R003", source: "E006", target: "E001", type: "data_feed", volume_tb_monthly: 640, contract_type: "exclusive_supply", label: "Exclusive supply agreement" },
+  { id: "R004", source: "E007", target: "E002", type: "data_feed", volume_tb_monthly: 230, contract_type: "api_license", label: "Geofence visit events" },
+  { id: "R005", source: "E005", target: "E004", type: "data_feed", volume_tb_monthly: 180, contract_type: "resale", label: "Enriched device graph" },
+  { id: "R006", source: "E001", target: "E008", type: "sale", volume_tb_monthly: 42, contract_type: "subscription", label: "Foot-traffic intelligence feed" },
+  { id: "R007", source: "E001", target: "E009", type: "sale", volume_tb_monthly: 18, contract_type: "pay_per_query", label: "Real-time locate requests" },
+  { id: "R008", source: "E002", target: "E011", type: "sale", volume_tb_monthly: 29, contract_type: "subscription", label: "Voter movement profiles" },
+  { id: "R009", source: "E002", target: "E012", type: "sale", volume_tb_monthly: 38, contract_type: "subscription", label: "Clinic & pharmacy visits" },
+  { id: "R010", source: "E003", target: "E010", type: "sale", volume_tb_monthly: 67, contract_type: "api_license", label: "Mobility-enriched credit model" },
+  { id: "R011", source: "E004", target: "E008", type: "sale", volume_tb_monthly: 55, contract_type: "subscription", label: "Retail earnings signals" },
+  { id: "R012", source: "E001", target: "E003", type: "exchange", volume_tb_monthly: 90, contract_type: "cross_license", label: "Cross-license: precise→enriched" },
+  { id: "R013", source: "E004", target: "E002", type: "exchange", volume_tb_monthly: 120, contract_type: "cross_license", label: "Device graph enrichment swap" },
+  { id: "R014", source: "E013", target: "E009", type: "enforcement", volume_tb_monthly: 0, contract_type: "regulatory", label: "CFPB action: debt collection location use" },
+  { id: "R015", source: "E013", target: "E010", type: "enforcement", volume_tb_monthly: 0, contract_type: "regulatory", label: "CFPB inquiry: insurance underwriting" },
+  { id: "R016", source: "E014", target: "E001", type: "enforcement", volume_tb_monthly: 0, contract_type: "regulatory", label: "FTC Section 5 investigation (open)" },
+];

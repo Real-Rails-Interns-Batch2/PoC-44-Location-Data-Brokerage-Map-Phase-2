@@ -1,0 +1,551 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+data_adapters.py
+main.py
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="data_adapters.py">
+"""
+Real Rails PoC 44 — Data Adapters
+Synthetic mock data: vendor relationships, SDKs, downstream buyers.
+All data is clearly labeled as synthetic/mock for demo purposes.
+Sources pattern: CFPB enforcement records, OpenSecrets lobbying data.
+"""
+
+from typing import List, Dict, Any
+
+
+def get_entities() -> List[Dict[str, Any]]:
+    return [
+        # ── Tier 1: Data Brokers (Core Rail Operators) ──
+        {
+            "id": "E001", "name": "Veridian Data Co.", "category": "broker",
+            "subcategory": "aggregator", "hq_state": "VA",
+            "location_granularity": "precise",  # <10m GPS
+            "use_cases": ["insurance_underwriting", "hedge_fund_alpha", "law_enforcement"],
+            "data_volume_monthly_tb": 420, "risk_score": 9.2,
+            "policy_flags_count": 4, "cfpb_actions": 2,
+            "lobbying_spend_2023_usd": 3_800_000,
+            "revenue_est_m": 890,
+            "description": "Largest independent aggregator; resells to 200+ downstream buyers.",
+        },
+        {
+            "id": "E002", "name": "Prism Location Inc.", "category": "broker",
+            "subcategory": "aggregator", "hq_state": "TX",
+            "location_granularity": "precise",
+            "use_cases": ["retail_analytics", "political_targeting", "debt_collection"],
+            "data_volume_monthly_tb": 310, "risk_score": 8.7,
+            "policy_flags_count": 3, "cfpb_actions": 1,
+            "lobbying_spend_2023_usd": 2_100_000,
+            "revenue_est_m": 640,
+            "description": "Specialises in real-time bid-stream data from 4,000+ SDK partners.",
+        },
+        {
+            "id": "E003", "name": "ClearPath Analytics", "category": "broker",
+            "subcategory": "enricher", "hq_state": "NY",
+            "location_granularity": "neighborhood",
+            "use_cases": ["credit_scoring", "fraud_detection", "healthcare"],
+            "data_volume_monthly_tb": 180, "risk_score": 6.8,
+            "policy_flags_count": 1, "cfpb_actions": 1,
+            "lobbying_spend_2023_usd": 950_000,
+            "revenue_est_m": 320,
+            "description": "Enriches credit bureau feeds with mobility patterns.",
+        },
+        {
+            "id": "E004", "name": "Meridian Signals", "category": "broker",
+            "subcategory": "aggregator", "hq_state": "CA",
+            "location_granularity": "precise",
+            "use_cases": ["advertising", "retail_analytics", "hedge_fund_alpha"],
+            "data_volume_monthly_tb": 560, "risk_score": 7.4,
+            "policy_flags_count": 2, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 1_700_000,
+            "revenue_est_m": 1_100,
+            "description": "Ad-tech origin; pivoted into financial intelligence market 2021.",
+        },
+        # ── Tier 2: SDK / Data Collection Vendors ──
+        {
+            "id": "E005", "name": "PulseSDK", "category": "sdk_vendor",
+            "subcategory": "mobile_sdk", "hq_state": "CA",
+            "location_granularity": "precise",
+            "use_cases": ["advertising", "app_analytics"],
+            "data_volume_monthly_tb": 890, "risk_score": 8.1,
+            "policy_flags_count": 2, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": 210,
+            "description": "Embedded in 47,000 apps; collects background location every 90s.",
+        },
+        {
+            "id": "E006", "name": "HorizonKit", "category": "sdk_vendor",
+            "subcategory": "mobile_sdk", "hq_state": "WA",
+            "location_granularity": "precise",
+            "use_cases": ["advertising", "retail_analytics"],
+            "data_volume_monthly_tb": 640, "risk_score": 7.9,
+            "policy_flags_count": 1, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": 155,
+            "description": "Weather & utility app SDK disguise; primary broker: Veridian.",
+        },
+        {
+            "id": "E007", "name": "GeoFence Pro", "category": "sdk_vendor",
+            "subcategory": "geofencing", "hq_state": "FL",
+            "location_granularity": "precise",
+            "use_cases": ["retail_analytics", "political_targeting"],
+            "data_volume_monthly_tb": 230, "risk_score": 6.3,
+            "policy_flags_count": 0, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": 78,
+            "description": "Geofencing-as-a-service; sells enriched visit data upstream.",
+        },
+        # ── Tier 3: Downstream Buyers ──
+        {
+            "id": "E008", "name": "Apex Capital Strategies", "category": "buyer",
+            "subcategory": "hedge_fund", "hq_state": "CT",
+            "location_granularity": "neighborhood",
+            "use_cases": ["hedge_fund_alpha"],
+            "data_volume_monthly_tb": 42, "risk_score": 4.2,
+            "policy_flags_count": 0, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": None,
+            "description": "Quantitative fund; uses foot-traffic data for retail stock signals.",
+        },
+        {
+            "id": "E009", "name": "National Recovery Group", "category": "buyer",
+            "subcategory": "debt_collector", "hq_state": "GA",
+            "location_granularity": "precise",
+            "use_cases": ["debt_collection"],
+            "data_volume_monthly_tb": 18, "risk_score": 8.9,
+            "policy_flags_count": 3, "cfpb_actions": 3,
+            "lobbying_spend_2023_usd": 480_000,
+            "revenue_est_m": 340,
+            "description": "Uses real-time location pings to serve process papers and locate debtors.",
+        },
+        {
+            "id": "E010", "name": "InsureMetrics LLC", "category": "buyer",
+            "subcategory": "insurance", "hq_state": "IL",
+            "location_granularity": "neighborhood",
+            "use_cases": ["insurance_underwriting"],
+            "data_volume_monthly_tb": 67, "risk_score": 6.1,
+            "policy_flags_count": 1, "cfpb_actions": 1,
+            "lobbying_spend_2023_usd": 1_200_000,
+            "revenue_est_m": 820,
+            "description": "Mobility patterns feed into home/auto premium models.",
+        },
+        {
+            "id": "E011", "name": "PrecisionVote LLC", "category": "buyer",
+            "subcategory": "political", "hq_state": "DC",
+            "location_granularity": "precise",
+            "use_cases": ["political_targeting"],
+            "data_volume_monthly_tb": 29, "risk_score": 9.5,
+            "policy_flags_count": 2, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": 95,
+            "description": "Targets voters at polling locations, places of worship, clinics.",
+        },
+        {
+            "id": "E012", "name": "HealthPath Analytics", "category": "buyer",
+            "subcategory": "healthcare", "hq_state": "MA",
+            "location_granularity": "precise",
+            "use_cases": ["healthcare"],
+            "data_volume_monthly_tb": 38, "risk_score": 7.8,
+            "policy_flags_count": 1, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 670_000,
+            "revenue_est_m": 190,
+            "description": "Infers clinic visits, addiction treatment attendance from mobility.",
+        },
+        # ── Tier 4: Regulators / Watchdogs ──
+        {
+            "id": "E013", "name": "CFPB", "category": "regulator",
+            "subcategory": "federal", "hq_state": "DC",
+            "location_granularity": None,
+            "use_cases": ["enforcement"],
+            "data_volume_monthly_tb": 0, "risk_score": 0,
+            "policy_flags_count": 0, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": None,
+            "description": "Issued 2024 advisory on data brokers in credit/debt context.",
+        },
+        {
+            "id": "E014", "name": "FTC", "category": "regulator",
+            "subcategory": "federal", "hq_state": "DC",
+            "location_granularity": None,
+            "use_cases": ["enforcement"],
+            "data_volume_monthly_tb": 0, "risk_score": 0,
+            "policy_flags_count": 0, "cfpb_actions": 0,
+            "lobbying_spend_2023_usd": 0,
+            "revenue_est_m": None,
+            "description": "FTC Act Section 5 enforcement on deceptive data practices.",
+        },
+    ]
+
+
+def get_relationships() -> List[Dict[str, Any]]:
+    return [
+        # SDK → Broker feeds
+        {"id": "R001", "source": "E005", "target": "E001", "type": "data_feed",
+         "volume_tb_monthly": 320, "contract_type": "revenue_share",
+         "label": "Bid-stream + background GPS"},
+        {"id": "R002", "source": "E005", "target": "E002", "type": "data_feed",
+         "volume_tb_monthly": 210, "contract_type": "revenue_share",
+         "label": "Raw location pings"},
+        {"id": "R003", "source": "E006", "target": "E001", "type": "data_feed",
+         "volume_tb_monthly": 640, "contract_type": "exclusive_supply",
+         "label": "Exclusive supply agreement"},
+        {"id": "R004", "source": "E007", "target": "E002", "type": "data_feed",
+         "volume_tb_monthly": 230, "contract_type": "api_license",
+         "label": "Geofence visit events"},
+        {"id": "R005", "source": "E005", "target": "E004", "type": "data_feed",
+         "volume_tb_monthly": 180, "contract_type": "resale",
+         "label": "Enriched device graph"},
+        # Broker → Buyer sales
+        {"id": "R006", "source": "E001", "target": "E008", "type": "sale",
+         "volume_tb_monthly": 42, "contract_type": "subscription",
+         "label": "Foot-traffic intelligence feed"},
+        {"id": "R007", "source": "E001", "target": "E009", "type": "sale",
+         "volume_tb_monthly": 18, "contract_type": "pay_per_query",
+         "label": "Real-time locate requests"},
+        {"id": "R008", "source": "E002", "target": "E011", "type": "sale",
+         "volume_tb_monthly": 29, "contract_type": "subscription",
+         "label": "Voter movement profiles"},
+        {"id": "R009", "source": "E002", "target": "E012", "type": "sale",
+         "volume_tb_monthly": 38, "contract_type": "subscription",
+         "label": "Clinic & pharmacy visits"},
+        {"id": "R010", "source": "E003", "target": "E010", "type": "sale",
+         "volume_tb_monthly": 67, "contract_type": "api_license",
+         "label": "Mobility-enriched credit model"},
+        {"id": "R011", "source": "E004", "target": "E008", "type": "sale",
+         "volume_tb_monthly": 55, "contract_type": "subscription",
+         "label": "Retail earnings signals"},
+        # Broker ↔ Broker data exchange
+        {"id": "R012", "source": "E001", "target": "E003", "type": "data_exchange",
+         "volume_tb_monthly": 90, "contract_type": "cross_license",
+         "label": "Cross-license: precise→enriched"},
+        {"id": "R013", "source": "E004", "target": "E002", "type": "data_exchange",
+         "volume_tb_monthly": 120, "contract_type": "cross_license",
+         "label": "Device graph enrichment swap"},
+        # Regulator actions
+        {"id": "R014", "source": "E013", "target": "E009", "type": "enforcement",
+         "volume_tb_monthly": 0, "contract_type": "regulatory",
+         "label": "CFPB action: debt collection location use"},
+        {"id": "R015", "source": "E013", "target": "E010", "type": "enforcement",
+         "volume_tb_monthly": 0, "contract_type": "regulatory",
+         "label": "CFPB inquiry: insurance underwriting"},
+        {"id": "R016", "source": "E014", "target": "E001", "type": "enforcement",
+         "volume_tb_monthly": 0, "contract_type": "regulatory",
+         "label": "FTC Section 5 investigation (open)"},
+    ]
+
+
+def get_policy_flags() -> List[Dict[str, Any]]:
+    return [
+        {
+            "id": "PF001", "entity_id": "E001", "entity_name": "Veridian Data Co.",
+            "source": "FTC", "year": 2023,
+            "flag_type": "investigation",
+            "severity": "critical",
+            "summary": "Open Section 5 investigation into deceptive consent practices in SDK partner agreements.",
+            "cfpb_docket": None, "opensecrets_cycle": "2022",
+            "lobbying_usd": 3_800_000,
+        },
+        {
+            "id": "PF002", "entity_id": "E001", "entity_name": "Veridian Data Co.",
+            "source": "CFPB", "year": 2022,
+            "flag_type": "advisory",
+            "severity": "elevated",
+            "summary": "Named in CFPB advisory on data brokers supplying location data to debt collectors.",
+            "cfpb_docket": "CFPB-2022-0047", "opensecrets_cycle": None,
+            "lobbying_usd": None,
+        },
+        {
+            "id": "PF003", "entity_id": "E009", "entity_name": "National Recovery Group",
+            "source": "CFPB", "year": 2024,
+            "flag_type": "enforcement_action",
+            "severity": "critical",
+            "summary": "Consent order: prohibited from purchasing real-time location data for debt collection purposes.",
+            "cfpb_docket": "CFPB-2024-0012", "opensecrets_cycle": "2024",
+            "lobbying_usd": 480_000,
+        },
+        {
+            "id": "PF004", "entity_id": "E011", "entity_name": "PrecisionVote LLC",
+            "source": "FEC", "year": 2024,
+            "flag_type": "disclosure_gap",
+            "severity": "critical",
+            "summary": "Location data purchased from Prism used for targeting at reproductive health clinics; FEC disclosure gap.",
+            "cfpb_docket": None, "opensecrets_cycle": "2024",
+            "lobbying_usd": 0,
+        },
+        {
+            "id": "PF005", "entity_id": "E010", "entity_name": "InsureMetrics LLC",
+            "source": "CFPB", "year": 2023,
+            "flag_type": "inquiry",
+            "severity": "elevated",
+            "summary": "CFPB inquiry into whether mobility-based underwriting violates FCRA adverse action notice rules.",
+            "cfpb_docket": "CFPB-2023-0089", "opensecrets_cycle": "2022",
+            "lobbying_usd": 1_200_000,
+        },
+    ]
+
+
+def get_sdk_lineage() -> List[Dict[str, Any]]:
+    return [
+        {
+            "sdk": "PulseSDK (E005)",
+            "apps_count": 47000,
+            "sample_apps": ["FlashWeather", "CityBike Tracker", "Budget Grocery"],
+            "data_collected": "GPS coordinates every 90s, foreground + background",
+            "consent_mechanism": "Buried in ToS paragraph 14b",
+            "flows_to_broker": "Veridian Data Co. (E001), Prism Location Inc. (E002), Meridian Signals (E004)",
+            "downstream_buyers": ["Apex Capital (E008)", "National Recovery Group (E009)", "PrecisionVote (E011)"],
+            "risk_note": "Background collection persists after app close; no opt-out mechanism.",
+        },
+        {
+            "sdk": "HorizonKit (E006)",
+            "apps_count": 31000,
+            "sample_apps": ["Storm Alert Pro", "ElectricMap", "LocalNews Now"],
+            "data_collected": "GPS + WiFi triangulation, 2-min intervals",
+            "consent_mechanism": "Location permission prompt only; broker relationship not disclosed",
+            "flows_to_broker": "Veridian Data Co. (E001) — exclusive contract",
+            "downstream_buyers": ["Apex Capital (E008)", "InsureMetrics (E010)"],
+            "risk_note": "Exclusive supply agreement means single point of broker control.",
+        },
+        {
+            "sdk": "GeoFence Pro (E007)",
+            "apps_count": 8500,
+            "sample_apps": ["RetailRewards", "ShopNearby"],
+            "data_collected": "Geofence entry/exit events with dwell time",
+            "consent_mechanism": "In-app reward exchange ('share location for coupons')",
+            "flows_to_broker": "Prism Location Inc. (E002)",
+            "downstream_buyers": ["PrecisionVote LLC (E011)", "HealthPath Analytics (E012)"],
+            "risk_note": "Dwell time at clinics, places of worship inferred from geofence events.",
+        },
+    ]
+
+
+def get_summary_metrics() -> Dict[str, Any]:
+    entities = get_entities()
+    df = pd.DataFrame(entities)
+
+    brokers = df[df["category"] == "broker"]
+    sdks = df[df["category"] == "sdk_vendor"]
+    buyers = df[df["category"] == "buyer"]
+
+    total_monthly_tb = df["data_volume_monthly_tb"].sum()
+    avg_risk_brokers = brokers["risk_score"].mean().round(1)
+    total_policy_flags = df["policy_flags_count"].sum()
+    total_lobbying = df["lobbying_spend_2023_usd"].sum()
+    highest_risk_entity = df.loc[df["risk_score"].idxmax(), "name"]
+
+    return {
+        "poc_id": 44,
+        "rail": "Distribution & Demand",
+        "title": "Location Data Brokerage Map",
+        "metric_headline": f"{int(total_monthly_tb / 1000)}+ PB/month in circulation",
+        "metric_subtext": "Across tracked broker-SDK network",
+        "broker_count": len(brokers),
+        "sdk_vendor_count": len(sdks),
+        "buyer_count": len(buyers),
+        "total_monthly_tb": int(total_monthly_tb),
+        "avg_broker_risk_score": float(avg_risk_brokers),
+        "total_policy_flags": int(total_policy_flags),
+        "total_lobbying_2023_usd": int(total_lobbying),
+        "highest_risk_entity": highest_risk_entity,
+        "apps_instrumented_est": 86500,
+        "why_this_matters": (
+            "Location data flows silently from 86,000+ apps through a small cartel of brokers "
+            "to hedge funds, debt collectors, insurers, and political campaigns — "
+            "with consent buried in legalese and no meaningful opt-out."
+        ),
+        "who_controls_the_rail": (
+            "Three broker intermediaries — Veridian, Prism, and Meridian — control over 70% of "
+            "the US precise-location data market, operating largely beyond FCRA/HIPAA scope while "
+            "lobbying aggressively to prevent federal data privacy legislation."
+        ),
+    }
+</file>
+
+<file path="main.py">
+"""
+Real Rails PoC 44 — Location Data Brokerage Map
+FastAPI Backend: ETL + Data Orchestration
+"""
+
+from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+import pandas as pd
+import json
+import io
+from typing import Optional
+from data_adapters import (
+    get_entities,
+    get_relationships,
+    get_policy_flags,
+    get_sdk_lineage,
+    get_summary_metrics,
+)
+
+app = FastAPI(
+    title="Real Rails — Location Data Brokerage Map API",
+    description="PoC 44: Distribution & Demand Rail — Location data broker network intelligence",
+    version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/")
+def root():
+    return {"rail": "Location Data Brokerage Map", "poc": 44, "status": "operational"}
+
+
+@app.get("/api/entities")
+def entities(
+    category: Optional[str] = Query(None, description="Filter by entity category"),
+    use_case: Optional[str] = Query(None, description="Filter by use case tag"),
+    granularity: Optional[str] = Query(None, description="Filter by location granularity"),
+):
+    """
+    Returns all broker/vendor/buyer entities.
+    Enriched with: market_share_pct, data_volume_monthly_tb, risk_score.
+    """
+    data = get_entities()
+    df = pd.DataFrame(data)
+
+    if category:
+        df = df[df["category"].str.lower() == category.lower()]
+    if use_case:
+        df = df[df["use_cases"].apply(lambda tags: use_case.lower() in [t.lower() for t in tags])]
+    if granularity:
+        df = df[df["location_granularity"].str.lower() == granularity.lower()]
+
+    # Intelligence layer: enrich with derived insight
+    if not df.empty:
+        avg_risk = df["risk_score"].mean()
+        df["risk_vs_avg"] = ((df["risk_score"] - avg_risk) / avg_risk * 100).round(1)
+        df["risk_label"] = df["risk_score"].apply(
+            lambda s: "Critical" if s >= 8 else "Elevated" if s >= 5 else "Moderate"
+        )
+
+    return {"entities": df.to_dict(orient="records"), "total": len(df)}
+
+
+@app.get("/api/relationships")
+def relationships(
+    source_id: Optional[str] = Query(None),
+    relationship_type: Optional[str] = Query(None),
+):
+    """
+    Returns entity relationship edges for the network graph.
+    Includes data flow direction, volume, and contractual type.
+    """
+    data = get_relationships()
+    df = pd.DataFrame(data)
+
+    if source_id:
+        df = df[(df["source"] == source_id) | (df["target"] == source_id)]
+    if relationship_type:
+        df = df[df["type"].str.lower() == relationship_type.lower()]
+
+    return {"relationships": df.to_dict(orient="records"), "total": len(df)}
+
+
+@app.get("/api/policy-flags")
+def policy_flags():
+    """
+    Returns CFPB enforcement actions and OpenSecrets lobbying expenditures
+    mapped to broker entities. Mock data labeled as synthetic.
+    """
+    return {"flags": get_policy_flags(), "source_note": "Synthetic mock derived from CFPB/OpenSecrets public records patterns"}
+
+
+@app.get("/api/sdk-lineage")
+def sdk_lineage():
+    """
+    Returns SDK → App → Broker lineage chain.
+    Shows how location data flows from device to downstream buyer.
+    """
+    return {"lineage": get_sdk_lineage()}
+
+
+@app.get("/api/summary")
+def summary():
+    """
+    High-level intelligence metrics for sidebar Section A.
+    All metrics are derived/enriched, not raw counts.
+    """
+    return get_summary_metrics()
+
+
+@app.get("/api/download/sample")
+def download_sample():
+    """
+    Download sample data as CSV for the sidebar Section E button.
+    """
+    entities = get_entities()
+    df = pd.DataFrame(entities)
+    # Drop internal fields for clean export
+    export_cols = ["id", "name", "category", "location_granularity", "use_cases",
+                   "data_volume_monthly_tb", "risk_score", "policy_flags_count", "hq_state"]
+    df_export = df[[c for c in export_cols if c in df.columns]]
+    df_export["use_cases"] = df_export["use_cases"].apply(lambda x: "|".join(x) if isinstance(x, list) else x)
+
+    stream = io.StringIO()
+    df_export.to_csv(stream, index=False)
+    stream.seek(0)
+
+    return StreamingResponse(
+        iter([stream.getvalue()]),
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=real_rails_poc44_sample.csv"},
+    )
+</file>
+
+</files>
