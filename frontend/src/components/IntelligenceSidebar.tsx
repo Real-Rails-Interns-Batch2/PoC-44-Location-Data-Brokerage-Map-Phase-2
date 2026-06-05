@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import type { GraphNode, DataMeta } from "../lib/types";
 import { ENTITY_COLORS } from "../lib/types";
 import { riskScoreCursorPct, brokerRiskColor } from "../lib/api";
@@ -217,7 +217,21 @@ function DetailRow({ label, value, accent }: { label: string; value: string; acc
     </div>
   );
 }
-
+async function downloadSampleCSV() {
+  try {
+    const res = await fetch("http://localhost:8000/api/download/sample");
+    if (!res.ok) throw new Error("failed");
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "real_rails_poc44_sample.csv";
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch {
+    alert("Backend offline — start uvicorn first.");
+  }
+}
 // ─── Main sidebar ─────────────────────────────────────────────────────────────
 export default function IntelligenceSidebar({ meta, selectedNode }: IntelligenceSidebarProps) {
   return (
@@ -298,6 +312,32 @@ export default function IntelligenceSidebar({ meta, selectedNode }: Intelligence
 
       {/* Selected node detail */}
       {selectedNode && <NodeDetail node={selectedNode} />}
+      {/* E · Download sample data */}
+      <SectionLabel text="E · Download sample data" />
+      <p style={{ fontSize: 12, color: "#64748b", lineHeight: 1.6, margin: "0 0 12px" }}>
+        Export entity table — broker names, risk scores, policy flags, data volumes.
+      </p>
+      <button
+        onClick={downloadSampleCSV}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          padding: "8px 16px",
+          fontSize: 12,
+          fontFamily: "inherit",
+          color: "#94a3b8",
+          background: "rgba(255,255,255,0.04)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: 6,
+          cursor: "pointer",
+          letterSpacing: "0.04em",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+        onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.04)")}
+      >
+        ↓ download sample CSV
+      </button>
     </aside>
   );
 }

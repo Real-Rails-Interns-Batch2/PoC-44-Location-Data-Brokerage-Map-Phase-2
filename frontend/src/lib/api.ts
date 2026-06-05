@@ -129,3 +129,16 @@ export function totalMonthlyRecords(): number {
     .filter((e) => e.records_per_month_M !== null)
     .reduce((sum, e) => sum + (e.records_per_month_M ?? 0), 0);
 }
+export const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+
+export async function downloadSampleCSV() {
+  const res = await fetch(`${API_BASE}/api/download/sample`);
+  if (!res.ok) throw new Error(`Download failed: ${res.status}`);
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'real_rails_poc44_sample.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
