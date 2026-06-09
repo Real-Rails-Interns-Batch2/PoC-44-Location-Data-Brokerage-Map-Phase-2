@@ -1,0 +1,29 @@
+[
+  {
+    "sdk": "PulseSDK (E005)", "apps_count": 47000,
+    "sample_apps": ["FlashWeather", "CityBike Tracker", "Budget Grocery"],
+    "data_collected": "GPS coordinates every 90s, foreground + background",
+    "consent_mechanism": "Buried in ToS paragraph 14b",
+    "flows_to_broker": "Veridian (E001), Prism (E002), Meridian (E004)",
+    "downstream_buyers": ["Apex Capital (E008)", "National Recovery Group (E009)", "PrecisionVote (E011)"],
+    "risk_note": "Background collection persists after app close; no opt-out mechanism."
+  },
+  {
+    "sdk": "HorizonKit (E006)", "apps_count": 31000,
+    "sample_apps": ["Storm Alert Pro", "ElectricMap", "LocalNews Now"],
+    "data_collected": "GPS + WiFi triangulation, 2-min intervals",
+    "consent_mechanism": "Location permission prompt only; broker relationship not disclosed",
+    "flows_to_broker": "Veridian Data Co. (E001) — exclusive contract",
+    "downstream_buyers": ["Apex Capital (E008)", "InsureMetrics (E010)"],
+    "risk_note": "Exclusive supply agreement: single point of broker control."
+  },
+  {
+    "sdk": "GeoFence Pro (E007)", "apps_count": 8500,
+    "sample_apps": ["RetailRewards", "ShopNearby"],
+    "data_collected": "Geofence entry/exit events with dwell time",
+    "consent_mechanism": "In-app reward exchange ('share location for coupons')",
+    "flows_to_broker": "Prism Location Inc. (E002)",
+    "downstream_buyers": ["PrecisionVote LLC (E011)", "HealthPath Analytics (E012)"],
+    "risk_note": "Dwell time at clinics, places of worship inferred from geofence events."
+  }
+]

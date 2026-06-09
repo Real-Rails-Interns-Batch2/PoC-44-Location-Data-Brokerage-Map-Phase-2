@@ -1,0 +1,27 @@
+[
+  {
+    "id": "PF001", "entity_id": "E001", "entity_name": "Veridian Data Co.",
+    "source": "FTC", "year": 2023, "flag_type": "investigation", "severity": "critical",
+    "summary": "Open Section 5 investigation into deceptive consent practices in SDK partner agreements."
+  },
+  {
+    "id": "PF002", "entity_id": "E001", "entity_name": "Veridian Data Co.",
+    "source": "CFPB", "year": 2022, "flag_type": "advisory", "severity": "elevated",
+    "summary": "Named in CFPB advisory on data brokers supplying location data to debt collectors."
+  },
+  {
+    "id": "PF003", "entity_id": "E009", "entity_name": "National Recovery Group",
+    "source": "CFPB", "year": 2024, "flag_type": "enforcement_action", "severity": "critical",
+    "summary": "Consent order: prohibited from purchasing real-time location data for debt collection purposes."
+  },
+  {
+    "id": "PF004", "entity_id": "E011", "entity_name": "PrecisionVote LLC",
+    "source": "FEC", "year": 2024, "flag_type": "disclosure_gap", "severity": "critical",
+    "summary": "Location data used for targeting at reproductive health clinics; FEC disclosure gap."
+  },
+  {
+    "id": "PF005", "entity_id": "E010", "entity_name": "InsureMetrics LLC",
+    "source": "CFPB", "year": 2023, "flag_type": "inquiry", "severity": "elevated",
+    "summary": "CFPB inquiry into whether mobility-based underwriting violates FCRA adverse action notice rules."
+  }
+]

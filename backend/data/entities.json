@@ -1,0 +1,128 @@
+[
+  {
+    "id": "E001", "name": "Veridian Data Co.", "category": "broker",
+    "subcategory": "aggregator", "hq_state": "VA",
+    "location_granularity": "precise",
+    "use_cases": ["insurance_underwriting", "hedge_fund_alpha", "law_enforcement"],
+    "data_volume_monthly_tb": 420, "risk_score": 9.2,
+    "cfpb_actions": 2, "lobbying_spend_2023_usd": 3800000, "revenue_est_m": 890,
+    "description": "Largest independent aggregator; resells to 200+ downstream buyers."
+  },
+  {
+    "id": "E002", "name": "Prism Location Inc.", "category": "broker",
+    "subcategory": "aggregator", "hq_state": "TX",
+    "location_granularity": "precise",
+    "use_cases": ["retail_analytics", "political_targeting", "debt_collection"],
+    "data_volume_monthly_tb": 310, "risk_score": 8.7,
+    "cfpb_actions": 1, "lobbying_spend_2023_usd": 2100000, "revenue_est_m": 640,
+    "description": "Specialises in real-time bid-stream data from 4,000+ SDK partners."
+  },
+  {
+    "id": "E003", "name": "ClearPath Analytics", "category": "broker",
+    "subcategory": "enricher", "hq_state": "NY",
+    "location_granularity": "neighborhood",
+    "use_cases": ["credit_scoring", "fraud_detection", "healthcare"],
+    "data_volume_monthly_tb": 180, "risk_score": 6.8,
+    "cfpb_actions": 1, "lobbying_spend_2023_usd": 950000, "revenue_est_m": 320,
+    "description": "Enriches credit bureau feeds with mobility patterns."
+  },
+  {
+    "id": "E004", "name": "Meridian Signals", "category": "broker",
+    "subcategory": "aggregator", "hq_state": "CA",
+    "location_granularity": "precise",
+    "use_cases": ["advertising", "retail_analytics", "hedge_fund_alpha"],
+    "data_volume_monthly_tb": 560, "risk_score": 7.4,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 1700000, "revenue_est_m": 1100,
+    "description": "Ad-tech origin; pivoted into financial intelligence market 2021."
+  },
+  {
+    "id": "E005", "name": "PulseSDK", "category": "sdk_vendor",
+    "subcategory": "mobile_sdk", "hq_state": "CA",
+    "location_granularity": "precise",
+    "use_cases": ["advertising", "app_analytics"],
+    "data_volume_monthly_tb": 890, "risk_score": 8.1,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": 210,
+    "description": "Embedded in 47,000 apps; collects background location every 90s."
+  },
+  {
+    "id": "E006", "name": "HorizonKit", "category": "sdk_vendor",
+    "subcategory": "mobile_sdk", "hq_state": "WA",
+    "location_granularity": "precise",
+    "use_cases": ["advertising", "retail_analytics"],
+    "data_volume_monthly_tb": 640, "risk_score": 7.9,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": 155,
+    "description": "Weather & utility app SDK disguise; primary broker: Veridian (exclusive)."
+  },
+  {
+    "id": "E007", "name": "GeoFence Pro", "category": "sdk_vendor",
+    "subcategory": "geofencing", "hq_state": "FL",
+    "location_granularity": "precise",
+    "use_cases": ["retail_analytics", "political_targeting"],
+    "data_volume_monthly_tb": 230, "risk_score": 6.3,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": 78,
+    "description": "Geofencing-as-a-service; sells enriched visit data upstream."
+  },
+  {
+    "id": "E008", "name": "Apex Capital Strategies", "category": "buyer",
+    "subcategory": "hedge_fund", "hq_state": "CT",
+    "location_granularity": "neighborhood",
+    "use_cases": ["hedge_fund_alpha"],
+    "data_volume_monthly_tb": 42, "risk_score": 4.2,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": null,
+    "description": "Quantitative fund; uses foot-traffic data for retail stock signals."
+  },
+  {
+    "id": "E009", "name": "National Recovery Group", "category": "buyer",
+    "subcategory": "debt_collector", "hq_state": "GA",
+    "location_granularity": "precise",
+    "use_cases": ["debt_collection"],
+    "data_volume_monthly_tb": 18, "risk_score": 8.9,
+    "cfpb_actions": 3, "lobbying_spend_2023_usd": 480000, "revenue_est_m": 340,
+    "description": "Uses real-time location pings to serve process papers and locate debtors."
+  },
+  {
+    "id": "E010", "name": "InsureMetrics LLC", "category": "buyer",
+    "subcategory": "insurance", "hq_state": "IL",
+    "location_granularity": "neighborhood",
+    "use_cases": ["insurance_underwriting"],
+    "data_volume_monthly_tb": 67, "risk_score": 6.1,
+    "cfpb_actions": 1, "lobbying_spend_2023_usd": 1200000, "revenue_est_m": 820,
+    "description": "Mobility patterns feed into home/auto premium models."
+  },
+  {
+    "id": "E011", "name": "PrecisionVote LLC", "category": "buyer",
+    "subcategory": "political", "hq_state": "DC",
+    "location_granularity": "precise",
+    "use_cases": ["political_targeting"],
+    "data_volume_monthly_tb": 29, "risk_score": 9.5,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": 95,
+    "description": "Targets voters at polling locations, places of worship, clinics."
+  },
+  {
+    "id": "E012", "name": "HealthPath Analytics", "category": "buyer",
+    "subcategory": "healthcare", "hq_state": "MA",
+    "location_granularity": "precise",
+    "use_cases": ["healthcare"],
+    "data_volume_monthly_tb": 38, "risk_score": 7.8,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 670000, "revenue_est_m": 190,
+    "description": "Infers clinic visits, addiction treatment attendance from mobility."
+  },
+  {
+    "id": "E013", "name": "CFPB", "category": "regulator",
+    "subcategory": "federal", "hq_state": "DC",
+    "location_granularity": null,
+    "use_cases": ["enforcement"],
+    "data_volume_monthly_tb": 0, "risk_score": 0,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": null,
+    "description": "Issued 2024 advisory on data brokers in credit/debt context."
+  },
+  {
+    "id": "E014", "name": "FTC", "category": "regulator",
+    "subcategory": "federal", "hq_state": "DC",
+    "location_granularity": null,
+    "use_cases": ["enforcement"],
+    "data_volume_monthly_tb": 0, "risk_score": 0,
+    "cfpb_actions": 0, "lobbying_spend_2023_usd": 0, "revenue_est_m": null,
+    "description": "FTC Act Section 5 enforcement on deceptive data practices."
+  }
+]
