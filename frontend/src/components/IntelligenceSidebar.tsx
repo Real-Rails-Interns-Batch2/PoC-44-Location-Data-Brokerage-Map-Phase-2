@@ -4,7 +4,7 @@ import type { GraphNode, DataMeta } from "../lib/types";
 import { ENTITY_COLORS } from "../lib/types";
 import { riskScoreCursorPct, brokerRiskColor } from "../lib/api";
 import { API_BASE } from "../lib/api";
-const res = await fetch(`${API_BASE}/api/download/sample`);
+
 interface IntelligenceSidebarProps {
   meta: DataMeta;
   selectedNode: GraphNode | null;
@@ -108,15 +108,17 @@ function NodeDetail({ node }: { node: GraphNode }) {
 
 async function downloadSampleCSV() {
   try {
-    const res = await fetch("http://localhost:8000/api/download/sample");
+    const res = await fetch(`${API_BASE}/api/download/sample`);
     if (!res.ok) throw new Error("failed");
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "real_rails_poc44_sample.csv"; a.click();
+    a.href = url;
+    a.download = "real_rails_poc44_sample.csv";
+    a.click();
     URL.revokeObjectURL(url);
   } catch {
-    alert("Backend offline — start uvicorn first.");
+    alert("Backend offline.");
   }
 }
 
