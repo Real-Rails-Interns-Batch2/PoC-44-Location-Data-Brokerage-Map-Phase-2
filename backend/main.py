@@ -3,6 +3,7 @@ Real Rails PoC 44 — Location Data Brokerage Map
 FastAPI Backend: ETL + Data Orchestration
 """
 
+import os
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -24,9 +25,13 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# ── CORS — reads from env var on Render, falls back to localhost for dev ──────
+_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+ALLOWED_ORIGINS = [o.strip() for o in _origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -150,3 +155,6 @@ def download_sample():
         media_type="text/csv",
         headers={"Content-Disposition": "attachment; filename=real_rails_poc44_sample.csv"},
     )
+@app.get("/health")
+def health():
+    return {"status": "ok"}

@@ -1,2 +1,13 @@
 node_modules/ 
 .next/ 
+backend/venv/
+backend/__pycache__/
+backend/.env
+*.pyc
+frontend/node_modules/
+frontend/.next/
+frontend/.env
+frontend/.env.local
+.env
+.DS_Store
+repomix-output.xml

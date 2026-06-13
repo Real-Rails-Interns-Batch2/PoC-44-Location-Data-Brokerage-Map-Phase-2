@@ -21,319 +21,223 @@
       "regulators": 2
     }
   },
-
   "nodes": [
     {
       "id": "pulse_sdk",
       "label": "PulseSDK",
       "type": "sdk_vendor",
       "episode_stage": 1,
-      "apps_instrumented": 41200,
-      "granularity_levels": ["precise", "city", "state"],
-      "data_types": ["GPS coordinates", "Device ID", "Dwell time"],
-      "risk_score": null,
-      "description": "Embedded in 41,200 consumer apps. Silent background location harvesting.",
-      "initial_position": { "x": 90, "y": 160 }
+      "description": "Embedded in 47,000 apps; collects background location every 90s with no foreground disclosure.",
+      "initial_position": { "x": 120, "y": 100 },
+      "apps_instrumented": 47000,
+      "granularity_levels": ["precise"],
+      "data_types": ["GPS coordinates", "background location", "device ID"]
     },
     {
       "id": "geo_pulse_sdk",
       "label": "GeoPulse SDK",
       "type": "sdk_vendor",
       "episode_stage": 1,
-      "apps_instrumented": 28300,
+      "description": "Weather & utility app SDK with exclusive supply agreement with Veridian Data.",
+      "initial_position": { "x": 120, "y": 280 },
+      "apps_instrumented": 31000,
       "granularity_levels": ["precise", "city"],
-      "data_types": ["GPS coordinates", "IP address", "Bluetooth beacons"],
-      "risk_score": null,
-      "description": "Embedded in 28,300 apps. Specialises in retail and venue detection.",
-      "initial_position": { "x": 90, "y": 300 }
+      "data_types": ["GPS", "WiFi triangulation", "cell tower"]
     },
     {
       "id": "nextrack_sdk",
       "label": "NexTrack SDK",
       "type": "sdk_vendor",
       "episode_stage": 1,
-      "apps_instrumented": 17000,
-      "granularity_levels": ["precise", "city", "state"],
-      "data_types": ["GPS coordinates", "Accelerometer", "Cell tower"],
-      "risk_score": null,
-      "description": "Embedded in 17,000 apps. High-frequency polling interval (every 4s).",
-      "initial_position": { "x": 90, "y": 440 }
+      "description": "Geofencing-as-a-service SDK; sells enriched visit dwell-time data upstream.",
+      "initial_position": { "x": 120, "y": 460 },
+      "apps_instrumented": 8500,
+      "granularity_levels": ["precise", "city"],
+      "data_types": ["geofence entry/exit", "dwell time", "visit frequency"]
     },
     {
       "id": "veridian_data",
-      "label": "Veridian Data",
+      "label": "Veridian Data Co.",
       "type": "broker",
       "episode_stage": 2,
-      "risk_score": 8.5,
+      "description": "Largest independent aggregator; resells to 200+ downstream buyers across 14 verticals.",
+      "initial_position": { "x": 360, "y": 80 },
+      "risk_score": 9.2,
       "resale_margin_pct": 820,
-      "policy_flags": ["FCRA gap exploited", "No meaningful opt-out"],
-      "monthly_records_sold_M": 1.4,
-      "description": "Primary aggregation broker. Resells to hedge funds and insurers.",
-      "initial_position": { "x": 390, "y": 175 }
+      "monthly_records_sold_M": 14200,
+      "policy_flags": ["FTC Section 5 investigation (open)", "CFPB advisory 2022"]
     },
     {
       "id": "prism_location",
-      "label": "Prism Location",
+      "label": "Prism Location Inc.",
       "type": "broker",
       "episode_stage": 2,
-      "risk_score": 8.2,
-      "resale_margin_pct": 630,
-      "policy_flags": ["No federal data privacy law", "HIPAA doesn't apply"],
-      "monthly_records_sold_M": 0.9,
-      "description": "Specialises in health-adjacent venue dwell data sold to insurers.",
-      "initial_position": { "x": 390, "y": 340 }
+      "description": "Specialises in real-time bid-stream data from 4,000+ SDK partners; dominant in political vertical.",
+      "initial_position": { "x": 360, "y": 240 },
+      "risk_score": 8.7,
+      "resale_margin_pct": 640,
+      "monthly_records_sold_M": 9800,
+      "policy_flags": []
     },
     {
       "id": "clearpath_analytics",
       "label": "ClearPath Analytics",
       "type": "broker",
       "episode_stage": 2,
-      "risk_score": 7.6,
+      "description": "Enriches credit bureau feeds with mobility patterns; sells to insurers and lenders.",
+      "initial_position": { "x": 360, "y": 380 },
+      "risk_score": 6.8,
       "resale_margin_pct": 410,
-      "policy_flags": ["No federal data privacy law"],
-      "monthly_records_sold_M": 0.5,
-      "description": "Mid-tier broker specialising in political campaign targeting packages.",
-      "initial_position": { "x": 390, "y": 500 }
+      "monthly_records_sold_M": 4200,
+      "policy_flags": []
     },
     {
       "id": "meridian_signals",
       "label": "Meridian Signals",
       "type": "broker",
       "episode_stage": 2,
-      "risk_score": 7.9,
-      "resale_margin_pct": 490,
-      "policy_flags": ["400–900% resale margin", "FCRA gap exploited"],
-      "monthly_records_sold_M": 0.4,
-      "description": "Downstream re-aggregator. Purchases from other brokers and repackages.",
-      "initial_position": { "x": 390, "y": 650 }
+      "description": "Ad-tech origin; pivoted into financial intelligence market 2021. Cross-licenses with all three peer brokers.",
+      "initial_position": { "x": 360, "y": 520 },
+      "risk_score": 7.4,
+      "resale_margin_pct": 510,
+      "monthly_records_sold_M": 7600,
+      "policy_flags": []
     },
     {
       "id": "apex_capital",
       "label": "Apex Capital",
       "type": "buyer",
       "episode_stage": 3,
+      "description": "Quantitative hedge fund; uses foot-traffic data for retail sector alpha generation.",
+      "initial_position": { "x": 590, "y": 60 },
       "buyer_category": "hedge_fund",
-      "use_case": "Alternative data for equity positioning",
-      "annual_spend_usd_M": 4.2,
-      "description": "Quantitative hedge fund. Uses mobility data for retail foot-traffic alpha.",
-      "initial_position": { "x": 680, "y": 130 }
+      "use_case": "Retail stock alpha — foot-traffic signals",
+      "annual_spend_usd_M": 4.2
     },
     {
       "id": "natl_recovery",
-      "label": "Natl Recovery",
+      "label": "Natl Recovery Group",
       "type": "buyer",
       "episode_stage": 3,
+      "description": "Debt collection firm; purchases real-time location pings to serve process papers and locate debtors.",
+      "initial_position": { "x": 590, "y": 190 },
       "buyer_category": "debt_collector",
-      "use_case": "Skip tracing — locate debtors by home/work pattern",
-      "annual_spend_usd_M": 1.1,
-      "description": "Debt collection agency. Cross-references location history for skip tracing.",
-      "initial_position": { "x": 680, "y": 290 }
+      "use_case": "Debtor location & process serving",
+      "annual_spend_usd_M": 1.8
     },
     {
       "id": "insure_metrics",
       "label": "InsureMetrics LLC",
       "type": "buyer",
       "episode_stage": 3,
+      "description": "Insurtech firm; mobility patterns feed directly into home and auto premium adjustment models.",
+      "initial_position": { "x": 590, "y": 320 },
       "buyer_category": "insurer",
-      "use_case": "Risk scoring via medical venue proximity",
-      "annual_spend_usd_M": 2.8,
-      "description": "Health insurer. Infers medical conditions from clinic/hospital dwell patterns.",
-      "initial_position": { "x": 680, "y": 430 }
+      "use_case": "Underwriting risk adjustment",
+      "annual_spend_usd_M": 6.7
     },
     {
       "id": "precision_vote",
       "label": "PrecisionVote LLC",
       "type": "buyer",
       "episode_stage": 3,
+      "description": "Political micro-targeting firm; targets voters at polling sites, clinics, and places of worship.",
+      "initial_position": { "x": 590, "y": 440 },
       "buyer_category": "political_campaign",
-      "use_case": "Voter micro-targeting by venue attendance",
-      "annual_spend_usd_M": 0.6,
-      "description": "Political data firm. Profiles voters by attendance at religious, protest, and union venues.",
-      "initial_position": { "x": 680, "y": 560 }
+      "use_case": "Voter micro-targeting & segmentation",
+      "annual_spend_usd_M": 2.9
     },
     {
       "id": "healthpath",
       "label": "HealthPath Analytics",
       "type": "buyer",
       "episode_stage": 3,
+      "description": "Infers clinic visits, addiction treatment attendance, and pharmacy trips from mobility data.",
+      "initial_position": { "x": 590, "y": 560 },
       "buyer_category": "pharma",
-      "use_case": "Patient journey mapping without consent",
-      "annual_spend_usd_M": 1.9,
-      "description": "Pharma analytics firm. Maps patient pathways from home to specialist clinics.",
-      "initial_position": { "x": 680, "y": 680 }
+      "use_case": "Patient behaviour & adherence modelling",
+      "annual_spend_usd_M": 3.8
     },
     {
       "id": "cfpb",
       "label": "CFPB",
       "type": "regulator",
       "episode_stage": 4,
-      "jurisdiction": "Federal — Consumer Financial Protection Bureau",
-      "enforcement_targets": ["natl_recovery"],
-      "gap_note": "Cannot reach upstream data brokers directly under current statutory authority.",
-      "initial_position": { "x": 940, "y": 290 }
+      "description": "Issued 2024 advisory on data brokers in credit and debt collection context.",
+      "initial_position": { "x": 800, "y": 220 },
+      "jurisdiction": "Federal — consumer finance",
+      "enforcement_targets": ["natl_recovery", "insure_metrics"],
+      "gap_note": "Authority limited to credit/debt use cases; no statutory reach to upstream broker-SDK network."
     },
     {
       "id": "ftc",
       "label": "FTC",
       "type": "regulator",
       "episode_stage": 4,
-      "jurisdiction": "Federal — Federal Trade Commission",
-      "enforcement_targets": ["insure_metrics"],
-      "gap_note": "Section 5 authority challenged; rulemaking stalled in Congress.",
-      "initial_position": { "x": 940, "y": 480 }
+      "description": "FTC Act Section 5 enforcement on deceptive data practices; open investigation on Veridian.",
+      "initial_position": { "x": 800, "y": 380 },
+      "jurisdiction": "Federal — unfair/deceptive acts",
+      "enforcement_targets": ["veridian_data"],
+      "gap_note": "Section 5 reach is case-by-case; no comprehensive data broker rule yet enacted."
     }
   ],
-
   "edges": [
-    {
-      "id": "e_pulse_veridian",
-      "source": "pulse_sdk",
-      "target": "veridian_data",
-      "relationship": "data_feed",
-      "granularity": "precise",
-      "records_per_month_M": 0.82,
-      "episode_stage": 1,
-      "label": "SDK→Broker"
-    },
-    {
-      "id": "e_pulse_prism",
-      "source": "pulse_sdk",
-      "target": "prism_location",
-      "relationship": "data_feed",
-      "granularity": "precise",
-      "records_per_month_M": 0.41,
-      "episode_stage": 1,
-      "label": "SDK→Broker"
-    },
-    {
-      "id": "e_geopulse_veridian",
-      "source": "geo_pulse_sdk",
-      "target": "veridian_data",
-      "relationship": "data_feed",
-      "granularity": "city",
-      "records_per_month_M": 0.55,
-      "episode_stage": 1,
-      "label": "SDK→Broker"
-    },
-    {
-      "id": "e_geopulse_clearpath",
-      "source": "geo_pulse_sdk",
-      "target": "clearpath_analytics",
-      "relationship": "data_feed",
-      "granularity": "city",
-      "records_per_month_M": 0.28,
-      "episode_stage": 1,
-      "label": "SDK→Broker"
-    },
-    {
-      "id": "e_nextrack_prism",
-      "source": "nextrack_sdk",
-      "target": "prism_location",
-      "relationship": "data_feed",
-      "granularity": "precise",
-      "records_per_month_M": 0.38,
-      "episode_stage": 1,
-      "label": "SDK→Broker"
-    },
-    {
-      "id": "e_nextrack_meridian",
-      "source": "nextrack_sdk",
-      "target": "meridian_signals",
-      "relationship": "data_feed",
-      "granularity": "state",
-      "records_per_month_M": 0.19,
-      "episode_stage": 1,
-      "label": "SDK→Broker"
-    },
-    {
-      "id": "e_veridian_clearpath",
-      "source": "veridian_data",
-      "target": "clearpath_analytics",
-      "relationship": "data_exchange",
-      "granularity": "city",
-      "records_per_month_M": 0.22,
-      "episode_stage": 2,
-      "label": "Broker exchange"
-    },
-    {
-      "id": "e_prism_meridian",
-      "source": "prism_location",
-      "target": "meridian_signals",
-      "relationship": "data_exchange",
-      "granularity": "precise",
-      "records_per_month_M": 0.17,
-      "episode_stage": 2,
-      "label": "Broker exchange"
-    },
-    {
-      "id": "e_veridian_apex",
-      "source": "veridian_data",
-      "target": "apex_capital",
-      "relationship": "sale",
-      "granularity": "city",
-      "records_per_month_M": 0.60,
-      "episode_stage": 3,
-      "label": "Sale"
-    },
-    {
-      "id": "e_veridian_natl",
-      "source": "veridian_data",
-      "target": "natl_recovery",
-      "relationship": "sale",
-      "granularity": "precise",
-      "records_per_month_M": 0.30,
-      "episode_stage": 3,
-      "label": "Sale"
-    },
-    {
-      "id": "e_prism_insure",
-      "source": "prism_location",
-      "target": "insure_metrics",
-      "relationship": "sale",
-      "granularity": "precise",
-      "records_per_month_M": 0.45,
-      "episode_stage": 3,
-      "label": "Sale"
-    },
-    {
-      "id": "e_clearpath_precision",
-      "source": "clearpath_analytics",
-      "target": "precision_vote",
-      "relationship": "sale",
-      "granularity": "city",
-      "records_per_month_M": 0.20,
-      "episode_stage": 3,
-      "label": "Sale"
-    },
-    {
-      "id": "e_meridian_healthpath",
-      "source": "meridian_signals",
-      "target": "healthpath",
-      "relationship": "sale",
-      "granularity": "precise",
-      "records_per_month_M": 0.25,
-      "episode_stage": 3,
-      "label": "Sale"
-    },
-    {
-      "id": "e_natl_recovery_cfpb",
-      "source": "cfpb",
-      "target": "natl_recovery",
-      "relationship": "enforcement",
-      "granularity": null,
-      "records_per_month_M": null,
-      "episode_stage": 4,
-      "label": "Enforcement probe"
-    },
-    {
-      "id": "e_insure_ftc",
-      "source": "ftc",
-      "target": "insure_metrics",
-      "relationship": "enforcement",
-      "granularity": null,
-      "records_per_month_M": null,
-      "episode_stage": 4,
-      "label": "Section 5 inquiry"
-    }
+    { "id": "e01", "source": "pulse_sdk",     "target": "veridian_data",      "relationship": "data_feed",     "granularity": "precise", "records_per_month_M": 4200,  "episode_stage": 1, "label": "Raw GPS pings — background harvest" },
+    { "id": "e02", "source": "pulse_sdk",     "target": "prism_location",     "relationship": "data_feed",     "granularity": "precise", "records_per_month_M": 2800,  "episode_stage": 1, "label": "Bid-stream location feed" },
+    { "id": "e03", "source": "geo_pulse_sdk", "target": "veridian_data",      "relationship": "data_feed",     "granularity": "precise", "records_per_month_M": 6100,  "episode_stage": 1, "label": "Exclusive GPS supply agreement" },
+    { "id": "e04", "source": "nextrack_sdk",  "target": "prism_location",     "relationship": "data_feed",     "granularity": "city",    "records_per_month_M": 1900,  "episode_stage": 1, "label": "Geofence visit events + dwell time" },
+    { "id": "e05", "source": "pulse_sdk",     "target": "meridian_signals",   "relationship": "data_feed",     "granularity": "precise", "records_per_month_M": 1500,  "episode_stage": 1, "label": "Enriched device graph feed" },
+    { "id": "e06", "source": "veridian_data", "target": "clearpath_analytics","relationship": "data_exchange",  "granularity": null,      "records_per_month_M": 900,   "episode_stage": 2, "label": "Cross-license: precise→enriched" },
+    { "id": "e07", "source": "meridian_signals","target":"prism_location",    "relationship": "data_exchange",  "granularity": null,      "records_per_month_M": 1200,  "episode_stage": 2, "label": "Device graph enrichment swap" },
+    { "id": "e08", "source": "veridian_data", "target": "apex_capital",       "relationship": "sale",           "granularity": null,      "records_per_month_M": 420,   "episode_stage": 3, "label": "Foot-traffic intelligence subscription" },
+    { "id": "e09", "source": "veridian_data", "target": "natl_recovery",      "relationship": "sale",           "granularity": "precise", "records_per_month_M": 180,   "episode_stage": 3, "label": "Real-time locate — pay per query" },
+    { "id": "e10", "source": "prism_location","target": "precision_vote",     "relationship": "sale",           "granularity": "precise", "records_per_month_M": 290,   "episode_stage": 3, "label": "Voter movement profiles" },
+    { "id": "e11", "source": "prism_location","target": "healthpath",         "relationship": "sale",           "granularity": "precise", "records_per_month_M": 380,   "episode_stage": 3, "label": "Clinic & pharmacy visit inference" },
+    { "id": "e12", "source": "clearpath_analytics","target":"insure_metrics", "relationship": "sale",           "granularity": "city",    "records_per_month_M": 670,   "episode_stage": 3, "label": "Mobility-enriched credit model" },
+    { "id": "e13", "source": "meridian_signals","target":"apex_capital",      "relationship": "sale",           "granularity": null,      "records_per_month_M": 550,   "episode_stage": 3, "label": "Retail earnings signals" },
+    { "id": "e14", "source": "cfpb",          "target": "natl_recovery",      "relationship": "enforcement",    "granularity": null,      "records_per_month_M": null,  "episode_stage": 4, "label": "Consent order: location data prohibition" },
+    { "id": "e15", "source": "cfpb",          "target": "insure_metrics",     "relationship": "enforcement",    "granularity": null,      "records_per_month_M": null,  "episode_stage": 4, "label": "CFPB inquiry: FCRA adverse action" },
+    { "id": "e16", "source": "ftc",           "target": "veridian_data",      "relationship": "enforcement",    "granularity": null,      "records_per_month_M": null,  "episode_stage": 4, "label": "FTC Section 5 investigation (open)" }
   ]
+}
+    {"id":"E001","name":"Veridian Data Co.","category":"broker","hq_state":"VA","location_granularity":"precise","use_cases":["insurance_underwriting","hedge_fund_alpha","law_enforcement"],"data_volume_monthly_tb":420,"risk_score":9.2,"policy_flags_count":4,"lobbying_spend_2023_usd":3800000,"description":"Largest independent aggregator; resells to 200+ downstream buyers."},
+    {"id":"E002","name":"Prism Location Inc.","category":"broker","hq_state":"TX","location_granularity":"precise","use_cases":["retail_analytics","political_targeting","debt_collection"],"data_volume_monthly_tb":310,"risk_score":8.7,"policy_flags_count":3,"lobbying_spend_2023_usd":2100000,"description":"Specialises in real-time bid-stream data from 4,000+ SDK partners."},
+    {"id":"E003","name":"ClearPath Analytics","category":"broker","hq_state":"NY","location_granularity":"neighborhood","use_cases":["credit_scoring","fraud_detection","healthcare"],"data_volume_monthly_tb":180,"risk_score":6.8,"policy_flags_count":1,"lobbying_spend_2023_usd":950000,"description":"Enriches credit bureau feeds with mobility patterns."},
+    {"id":"E004","name":"Meridian Signals","category":"broker","hq_state":"CA","location_granularity":"precise","use_cases":["advertising","retail_analytics","hedge_fund_alpha"],"data_volume_monthly_tb":560,"risk_score":7.4,"policy_flags_count":2,"lobbying_spend_2023_usd":1700000,"description":"Ad-tech origin; pivoted into financial intelligence market 2021."},
+    {"id":"E005","name":"PulseSDK","category":"sdk_vendor","hq_state":"CA","location_granularity":"precise","use_cases":["advertising","app_analytics"],"data_volume_monthly_tb":890,"risk_score":8.1,"policy_flags_count":2,"lobbying_spend_2023_usd":0,"description":"Embedded in 47,000 apps; collects background location every 90s."},
+    {"id":"E006","name":"HorizonKit","category":"sdk_vendor","hq_state":"WA","location_granularity":"precise","use_cases":["advertising","retail_analytics"],"data_volume_monthly_tb":640,"risk_score":7.9,"policy_flags_count":1,"lobbying_spend_2023_usd":0,"description":"Weather & utility app SDK; primary broker: Veridian (exclusive)."},
+    {"id":"E007","name":"GeoFence Pro","category":"sdk_vendor","hq_state":"FL","location_granularity":"precise","use_cases":["retail_analytics","political_targeting"],"data_volume_monthly_tb":230,"risk_score":6.3,"policy_flags_count":0,"lobbying_spend_2023_usd":0,"description":"Geofencing-as-a-service; sells enriched visit data upstream."},
+    {"id":"E008","name":"Apex Capital","category":"buyer","hq_state":"CT","location_granularity":"neighborhood","use_cases":["hedge_fund_alpha"],"data_volume_monthly_tb":42,"risk_score":4.2,"policy_flags_count":0,"lobbying_spend_2023_usd":0,"description":"Quantitative fund; uses foot-traffic data for retail stock signals."},
+    {"id":"E009","name":"Natl Recovery Group","category":"buyer","hq_state":"GA","location_granularity":"precise","use_cases":["debt_collection"],"data_volume_monthly_tb":18,"risk_score":8.9,"policy_flags_count":3,"lobbying_spend_2023_usd":480000,"description":"Uses real-time location pings to serve process papers and locate debtors."},
+    {"id":"E010","name":"InsureMetrics LLC","category":"buyer","hq_state":"IL","location_granularity":"neighborhood","use_cases":["insurance_underwriting"],"data_volume_monthly_tb":67,"risk_score":6.1,"policy_flags_count":1,"lobbying_spend_2023_usd":1200000,"description":"Mobility patterns feed into home/auto premium models."},
+    {"id":"E011","name":"PrecisionVote LLC","category":"buyer","hq_state":"DC","location_granularity":"precise","use_cases":["political_targeting"],"data_volume_monthly_tb":29,"risk_score":9.5,"policy_flags_count":2,"lobbying_spend_2023_usd":0,"description":"Targets voters at polling locations, places of worship, clinics."},
+    {"id":"E012","name":"HealthPath Analytics","category":"buyer","hq_state":"MA","location_granularity":"precise","use_cases":["healthcare"],"data_volume_monthly_tb":38,"risk_score":7.8,"policy_flags_count":1,"lobbying_spend_2023_usd":670000,"description":"Infers clinic visits, addiction treatment attendance from mobility."},
+    {"id":"E013","name":"CFPB","category":"regulator","hq_state":"DC","location_granularity":null,"use_cases":["enforcement"],"data_volume_monthly_tb":0,"risk_score":0,"policy_flags_count":0,"lobbying_spend_2023_usd":0,"description":"Issued 2024 advisory on data brokers in credit/debt context."},
+    {"id":"E014","name":"FTC","category":"regulator","hq_state":"DC","location_granularity":null,"use_cases":["enforcement"],"data_volume_monthly_tb":0,"risk_score":0,"policy_flags_count":0,"lobbying_spend_2023_usd":0,"description":"FTC Act Section 5 enforcement on deceptive data practices."}
+  ],
+  "policy_flags": [
+    {"id":"PF001","entity_id":"E001","entity_name":"Veridian Data Co.","source":"FTC","year":2023,"flag_type":"investigation","severity":"critical","summary":"Open Section 5 investigation into deceptive consent practices in SDK partner agreements."},
+    {"id":"PF002","entity_id":"E001","entity_name":"Veridian Data Co.","source":"CFPB","year":2022,"flag_type":"advisory","severity":"elevated","summary":"Named in CFPB advisory on data brokers supplying location data to debt collectors."},
+    {"id":"PF003","entity_id":"E009","entity_name":"Natl Recovery Group","source":"CFPB","year":2024,"flag_type":"enforcement_action","severity":"critical","summary":"Consent order: prohibited from purchasing real-time location data for debt collection purposes."},
+    {"id":"PF004","entity_id":"E011","entity_name":"PrecisionVote LLC","source":"FEC","year":2024,"flag_type":"disclosure_gap","severity":"critical","summary":"Location data used for targeting at reproductive health clinics; FEC disclosure gap."},
+    {"id":"PF005","entity_id":"E010","entity_name":"InsureMetrics LLC","source":"CFPB","year":2023,"flag_type":"inquiry","severity":"elevated","summary":"CFPB inquiry into whether mobility-based underwriting violates FCRA adverse action notice rules."}
+  ],
+  "summary": {
+    "poc_id": 44,
+    "rail": "Distribution & Demand",
+    "title": "Location Data Brokerage Map",
+    "metric_headline": "2+ PB/month in circulation",
+    "metric_subtext": "Across tracked broker-SDK network",
+    "broker_count": 4,
+    "sdk_vendor_count": 3,
+    "buyer_count": 5,
+    "total_monthly_tb": 2360,
+    "avg_broker_risk_score": 8.0,
+    "total_policy_flags": 11,
+    "total_lobbying_2023_usd": 10900000,
+    "highest_risk_entity": "PrecisionVote LLC",
+    "apps_instrumented_est": 86500,
+    "why_this_matters": "Location data flows silently from 86,000+ apps through a small cartel of brokers to hedge funds, debt collectors, insurers, and political campaigns — with consent buried in legalese and no meaningful opt-out.",
+    "who_controls_the_rail": "Three broker intermediaries — Veridian, Prism, and Meridian — control over 70% of the US precise-location data market, operating largely beyond FCRA/HIPAA scope while lobbying aggressively to prevent federal data privacy legislation."
+  }
 }

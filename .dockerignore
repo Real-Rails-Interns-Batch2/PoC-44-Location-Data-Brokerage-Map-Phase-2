@@ -1,0 +1,28 @@
+# ── Node ─────────────────────────────────────────────────────
+**/node_modules
+**/.next/cache
+**/.next/static/development
+
+# ── Python ───────────────────────────────────────────────────
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/.venv
+**/venv
+**/.pytest_cache
+
+# ── Secrets ──────────────────────────────────────────────────
+.env
+**/.env.local
+**/.env.*.local
+
+# ── Git / IDE ────────────────────────────────────────────────
+.git
+.gitignore
+.vscode
+.idea
+
+# ── Misc ─────────────────────────────────────────────────────
+README.md
+repomix-output.xml
+**/repomix-output.xml

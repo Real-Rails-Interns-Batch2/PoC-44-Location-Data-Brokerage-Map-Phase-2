@@ -1,0 +1,64 @@
+# ─────────────────────────────────────────────────────────────
+#  Real Rails PoC 44 — Full Stack
+#  Usage:  docker compose up --build
+# ─────────────────────────────────────────────────────────────
+
+name: real-rails-poc44
+
+services:
+
+  # ── FastAPI backend ───────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    image: real-rails-backend:poc44
+    container_name: rr_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Runtime vars (not baked at build time)
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      # Mount data dir so you can swap JSON files without rebuilding
+      - ./backend/data:/app/data:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - rails_net
+
+  # ── Next.js frontend ─────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+      args:
+        # NEXT_PUBLIC_* vars must be known at build time
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://backend:8000}
+        NEXT_PUBLIC_MAPBOX_TOKEN: ${NEXT_PUBLIC_MAPBOX_TOKEN:-}
+    image: real-rails-frontend:poc44
+    container_name: rr_frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - rails_net
+
+networks:
+  rails_net:
+    driver: bridge
