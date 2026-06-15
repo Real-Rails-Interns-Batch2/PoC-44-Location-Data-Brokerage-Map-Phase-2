@@ -64,7 +64,7 @@ export default function Page() {
         borderBottom:"1px solid rgba(6,182,212,0.10)",
       }}>
         <span style={{ background:"rgba(6,182,212,0.12)", color:"#67e8f9", fontSize:10, fontWeight:700, padding:"3px 10px", borderRadius:3, letterSpacing:"0.1em", border:"1px solid rgba(6,182,212,0.25)" }}>
-          REAL RAILS
+          INFOCREON INTERNSHIP
         </span>
         <span style={{ color:"#164e63", fontSize:12, letterSpacing:"0.04em" }}>
           LOCATION DATA BROKERAGE MAP&nbsp;/&nbsp;PoC {dataset.meta.poc}
