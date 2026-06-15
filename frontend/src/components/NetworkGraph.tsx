@@ -116,7 +116,7 @@ export default function NetworkGraph({ activeStage, granularity, onNodeSelect }:
         container: containerRef.current,
         elements: buildElements(activeStage, granularity),
         style: buildStylesheet(activeStage),
-        layout: { name: "preset" },
+        layout: { name: "preset", fit: false },
         userZoomingEnabled: true,
         userPanningEnabled: true,
         boxSelectionEnabled: false,
