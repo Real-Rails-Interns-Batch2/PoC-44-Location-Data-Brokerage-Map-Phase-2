@@ -65,7 +65,7 @@ function buildStylesheet(activeStage: EpisodeStage): StylesheetCSS[] {
       selector: `edge[episode_stage = ${activeStage}]`,
       style: { opacity: 1, width: 2 } as any,
     },
-  ] as StylesheetCSS[];
+  ] as unknown as StylesheetCSS[];
 }
 
 function buildElements(activeStage: EpisodeStage, granularity: Granularity) {

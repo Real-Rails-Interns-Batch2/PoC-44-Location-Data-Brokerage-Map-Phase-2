@@ -17,7 +17,7 @@ const NetworkGraph = dynamic(() => import("../components/NetworkGraph"), {
 });
 
 const STACK = ["React","Next.js","TypeScript","Tailwind CSS","shadcn/ui","D3.js","Plotly","Apache ECharts","TanStack Table","FastAPI","Pandas"];
-const META_INFO = { location: "Haifa", batch: "Batch 2" };
+const META_INFO = { location: "Kochi", batch: "Batch 2", author: "Haifa" };
 
 const HEADER_H  = 44;
 const STEPPER_H = 40;
@@ -91,6 +91,9 @@ export default function Page() {
               {/* popover */}
               <div style={{ position:"absolute", top:34, right:0, width:280, zIndex:50, background:"rgba(1,14,22,0.98)", border:"1px solid rgba(6,182,212,0.18)", borderRadius:6, padding:"14px 16px", boxShadow:"0 8px 32px rgba(0,0,0,0.7)" }}>
                 <div style={{ fontSize:10, color:"#06b6d4", letterSpacing:"0.12em", marginBottom:10 }}>PROJECT INFO</div>
+                <div style={{ fontSize:12, color:"#94a3b8", marginBottom:4 }}>
+                  <span style={{ color:"#67e8f9" }}>Author</span>&emsp;&emsp;{META_INFO.author}
+                </div>
                 <div style={{ fontSize:12, color:"#94a3b8", marginBottom:4 }}>
                   <span style={{ color:"#67e8f9" }}>Location</span>&emsp;{META_INFO.location}
                 </div>
