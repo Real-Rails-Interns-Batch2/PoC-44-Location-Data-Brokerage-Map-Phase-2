@@ -1,18 +1,18 @@
 ============================================================
 REAL RAILS — PoC 44 — UAT TEST REPORT
 Target URL : https://real-rails-web-7r16.onrender.com
-Run at     : 2026-06-15T13:30:17
+Run at     : 2026-06-15T15:08:06
 ============================================================
 
-[FAIL] Test 1: Visual Load (background + map container)
-       -> background='none...' canvas_visible=True
+[PASS] Test 1: Visual Load (background + map container)
+       -> background='radial-gradient(120% 80% at 60% 40%, rgb(2, 16, 24) 0%, rgb(...' canvas_visible=True
 
-[FAIL] Test 2: The Handshake (node click -> Intelligence Panel)
-       -> panel transform='matrix(1, 0, 0, 1, 360, 0)'
+[PASS] Test 2: The Handshake (node click -> Intelligence Panel)
+       -> panel transform='matrix(1, 0, 0, 1, 0, 0)'
 
-[FAIL] Test 3: The Signature (info icon -> name present)
-       -> Looking for 'Your Name Here' in popover text. Found=False. Popover text snippet: 'PROJECT INFO\nLocation\u2003Haifa\nCohort\u2003\u2003Batch 2\nSTACK\nReact\nNext.js\nTypeScript\nTailwind CSS\nshadcn/ui\nD3.js\nPlotly\nApache ECharts\nTanStack Table\nFastAPI\nP'
+[PASS] Test 3: The Signature (info icon -> name present)
+       -> Looking for 'Haifa' in popover text. Found=True. Popover text snippet: 'PROJECT INFO\nAuthor\u2003\u2003Haifa\nLocation\u2003Kochi\nCohort\u2003\u2003Batch 2\nSTACK\nReact\nNext.js\nTypeScript\nTailwind CSS\nshadcn/ui\nD3.js\nPlotly\nApache ECharts\nTanStack T'
 
 ------------------------------------------------------------
-SUMMARY: 0/3 tests passed
+SUMMARY: 3/3 tests passed
 ------------------------------------------------------------

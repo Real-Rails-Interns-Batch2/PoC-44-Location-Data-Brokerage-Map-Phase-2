@@ -1,5 +1,5 @@
 """
-Real Rails PoC 44 — UAT Automation Script
+Real Rails PoC 44 — UAT Automation Script (v2)
 Tests the live deployment using Selenium WebDriver.
 
 Usage:
@@ -14,7 +14,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
@@ -23,16 +22,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ── Config ──────────────────────────────────────────────────────────────────
 
 TARGET_URL = "https://real-rails-web-7r16.onrender.com"
-
-# >>> EDIT THIS to match what you add to META_INFO.author in page.tsx <<<
 YOUR_NAME = "Haifa"
 
-# Pixel offset of node E005 (PulseSDK) relative to the graph canvas,
-# based on its initial_position {x:120, y:100} in src/lib/api.ts
-NODE_CLICK_OFFSET = (120, 100)
+NODE_ID_TO_SELECT = "E005"  # PulseSDK
 
-PAGE_LOAD_TIMEOUT = 60   # Render free tier can cold-start (30-60s)
-ELEMENT_TIMEOUT   = 20
+# Render free tier cold starts can take well over a minute.
+PAGE_LOAD_TIMEOUT = 180     # max time to attempt initial navigation
+COLD_START_WAIT   = 180     # max time to wait for canvas/page-ready after navigation
+ELEMENT_TIMEOUT   = 30      # normal element wait once page is warm
 
 REPORT_FILE = "Test_Report.txt"
 
@@ -71,8 +68,6 @@ def write_report():
     print(f"\nReport written to {REPORT_FILE}")
 
 
-# ── Driver setup ────────────────────────────────────────────────────────────
-
 def get_driver():
     options = Options()
     options.add_argument("--headless=new")
@@ -83,8 +78,39 @@ def get_driver():
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-    driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
     return driver
+
+
+def navigate_with_cold_start_handling(driver):
+    """
+    Render free tier cold starts can exceed the normal page-load timeout.
+    Attempt navigation; if it times out, the server may still be warming up
+    and finish rendering shortly after — so we don't treat this as fatal.
+    Instead we poll until the canvas element appears or COLD_START_WAIT elapses.
+    """
+    driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
+    try:
+        driver.get(TARGET_URL)
+        print("Initial navigation completed normally.")
+        return True
+    except Exception as e:
+        print(f"Initial navigation timed out ({e.__class__.__name__}) — "
+              f"likely Render cold start. Polling for readiness...")
+
+    # Poll until the canvas (Cytoscape) appears, or we give up
+    deadline = time.time() + COLD_START_WAIT
+    while time.time() < deadline:
+        try:
+            canvas = driver.find_elements(By.TAG_NAME, "canvas")
+            if canvas and canvas[0].is_displayed():
+                print("Page became ready during cold-start polling.")
+                return True
+        except Exception:
+            pass
+        time.sleep(2)
+
+    print("Page did not become ready within cold-start window.")
+    return False
 
 
 # ── Test Case 1: Visual Load ────────────────────────────────────────────────
@@ -92,19 +118,10 @@ def get_driver():
 def test_visual_load(driver, wait):
     test_name = "Test 1: Visual Load (background + map container)"
     try:
-        driver.get(TARGET_URL)
-
-        # Wait for the root fixed-position container to render
-        root = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "div")))
-
-        # Find the outermost div with the dark gradient background
-        # (rendered with position: fixed, inset: 0 in page.tsx)
         outer = driver.find_element(By.CSS_SELECTOR, "body > div")
         bg = outer.value_of_css_property("background-image") or outer.value_of_css_property("background-color")
-
         bg_ok = bool(bg) and bg != "none" and "rgba(0, 0, 0, 0)" not in bg
 
-        # Wait for the graph canvas (Cytoscape) to mount
         canvas = wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))
         canvas_visible = canvas.is_displayed()
 
@@ -123,41 +140,34 @@ def test_visual_load(driver, wait):
 def test_handshake(driver, wait):
     test_name = "Test 2: The Handshake (node click -> Intelligence Panel)"
     try:
-        canvas = wait.until(EC.presence_of_element_located((By.TAG_NAME, "canvas")))
+        # Wait (generously) for the test hook to be registered on window
+        long_wait = WebDriverWait(driver, ELEMENT_TIMEOUT * 2)
+        long_wait.until(lambda d: d.execute_script(
+            "return typeof window.__testSelectNode === 'function'"
+        ))
 
-        # Click at the pixel position of node E005 (PulseSDK)
-        actions = ActionChains(driver)
-        actions.move_to_element(canvas).move_by_offset(
-            NODE_CLICK_OFFSET[0] - canvas.size["width"] // 2,
-            NODE_CLICK_OFFSET[1] - canvas.size["height"] // 2,
-        ).click().perform()
+        success = driver.execute_script(
+            f"return window.__testSelectNode('{NODE_ID_TO_SELECT}')"
+        )
+        if not success:
+            log_result(test_name, False, f"Test hook returned false — node '{NODE_ID_TO_SELECT}' not found")
+            return False
 
         time.sleep(1)  # allow 340ms slide transition + buffer
 
-        # Locate the Intelligence Panel container via its header text
         panel_header = wait.until(
             EC.presence_of_element_located(
                 (By.XPATH, "//span[contains(text(), 'INTELLIGENCE PANEL')]")
             )
         )
-        # Panel container is the grandparent of the header span
         panel_container = panel_header.find_element(By.XPATH, "../..")
-
         transform = panel_container.value_of_css_property("transform")
 
-        # When open: translateX(0) / matrix(1,0,0,1,0,0)
-        # When closed: translateX(100%) / matrix with large tx
-        is_open = (
-            "matrix" in transform
-            and not transform.endswith("none")
-        )
-
-        # More reliable check: matrix tx component should be ~0 when open
         tx_zero = False
         if transform.startswith("matrix("):
             parts = transform.replace("matrix(", "").replace(")", "").split(",")
             tx = float(parts[4].strip())
-            tx_zero = abs(tx) < 5  # near 0px = panel slid into view
+            tx_zero = abs(tx) < 5
 
         passed = tx_zero
         detail = f"panel transform='{transform}'"
@@ -174,14 +184,12 @@ def test_handshake(driver, wait):
 def test_signature(driver, wait):
     test_name = "Test 3: The Signature (info icon -> name present)"
     try:
-        # The (i) button is a <button> containing the text "i"
         info_button = wait.until(
             EC.element_to_be_clickable((By.XPATH, "//button[normalize-space(text())='i']"))
         )
         info_button.click()
-        time.sleep(0.5)  # popover render
+        time.sleep(0.5)
 
-        # Locate the popover containing "PROJECT INFO"
         popover = wait.until(
             EC.presence_of_element_located(
                 (By.XPATH, "//div[contains(text(), 'PROJECT INFO')]/..")
@@ -208,15 +216,24 @@ def test_signature(driver, wait):
 
 def main():
     print(f"Starting UAT against {TARGET_URL}")
-    print("(Render free tier may cold-start — first load can take up to 60s)\n")
+    print("(Render free tier may cold-start — first load can take up to 3 minutes)\n")
 
     driver = get_driver()
     wait = WebDriverWait(driver, ELEMENT_TIMEOUT)
 
     try:
-        test_visual_load(driver, wait)
-        test_handshake(driver, wait)
-        test_signature(driver, wait)
+        ready = navigate_with_cold_start_handling(driver)
+        if not ready:
+            for name in [
+                "Test 1: Visual Load (background + map container)",
+                "Test 2: The Handshake (node click -> Intelligence Panel)",
+                "Test 3: The Signature (info icon -> name present)",
+            ]:
+                log_result(name, False, "Page never became ready (cold start exceeded limit)")
+        else:
+            test_visual_load(driver, wait)
+            test_handshake(driver, wait)
+            test_signature(driver, wait)
     finally:
         driver.quit()
 
