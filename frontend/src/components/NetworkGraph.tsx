@@ -139,6 +139,16 @@ export default function NetworkGraph({ activeStage, granularity, onNodeSelect }:
 
   useEffect(() => {
     const cy = cyRef.current;
+    if (typeof window !== "undefined") {
+  (window as any).__testSelectNode = (id: string) => {
+    const node = cy.getElementById(id);
+    if (node && node.length > 0) {
+      onNodeSelect(node.data("_raw"));
+      return true;
+    }
+    return false;
+  };
+}
     if (!cy) return;
     cy.batch(() => {
       cy.elements().remove();
