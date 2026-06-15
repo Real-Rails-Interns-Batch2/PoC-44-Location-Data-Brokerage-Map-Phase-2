@@ -109,53 +109,55 @@ export default function NetworkGraph({ activeStage, granularity, onNodeSelect }:
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<any>(null);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-    import("cytoscape").then(({ default: cytoscape }) => {
-      const cy = cytoscape({
-        container: containerRef.current,
-        elements: buildElements(activeStage, granularity),
-        style: buildStylesheet(activeStage),
-        layout: { name: "preset", fit: false },
-        userZoomingEnabled: true,
-        userPanningEnabled: true,
-        boxSelectionEnabled: false,
-        autoungrabify: false,
-      });
-      cy.container()!.style.background = "#030712";
-
-      cy.on("tap", "node", (evt: any) => {
-        const raw: GraphNode = evt.target.data("_raw");
-        onNodeSelect(raw ?? null);
-      });
-      cy.on("tap", (evt: any) => {
-        if (evt.target === cy) onNodeSelect(null);
-      });
-      cyRef.current = cy;
+useEffect(() => {
+  if (!containerRef.current) return;
+  import("cytoscape").then(({ default: cytoscape }) => {
+    const cy = cytoscape({
+      container: containerRef.current,
+      elements: buildElements(activeStage, granularity),
+      style: buildStylesheet(activeStage),
+      layout: { name: "preset", fit: false },
+      userZoomingEnabled: true,
+      userPanningEnabled: true,
+      boxSelectionEnabled: false,
+      autoungrabify: false,
     });
-    return () => { cyRef.current?.destroy(); };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    cy.container()!.style.background = "#030712";
 
-  useEffect(() => {
-    const cy = cyRef.current;
+    cy.on("tap", "node", (evt: any) => {
+      const raw: GraphNode = evt.target.data("_raw");
+      onNodeSelect(raw ?? null);
+    });
+    cy.on("tap", (evt: any) => {
+      if (evt.target === cy) onNodeSelect(null);
+    });
+    cyRef.current = cy;
+
+    // Test hook for Selenium UAT — correctly captures the real cy instance
     if (typeof window !== "undefined") {
-  (window as any).__testSelectNode = (id: string) => {
-    const node = cy.getElementById(id);
-    if (node && node.length > 0) {
-      onNodeSelect(node.data("_raw"));
-      return true;
+      (window as any).__testSelectNode = (id: string) => {
+        const node = cy.getElementById(id);
+        if (node && node.length > 0) {
+          onNodeSelect(node.data("_raw"));
+          return true;
+        }
+        return false;
+      };
     }
-    return false;
-  };
-}
-    if (!cy) return;
-    cy.batch(() => {
-      cy.elements().remove();
-      cy.add(buildElements(activeStage, granularity));
-      cy.style(buildStylesheet(activeStage));
-    });
-  }, [activeStage, granularity]);
+  });
+  return () => { cyRef.current?.destroy(); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+useEffect(() => {
+  const cy = cyRef.current;
+  if (!cy) return;
+  cy.batch(() => {
+    cy.elements().remove();
+    cy.add(buildElements(activeStage, granularity));
+    cy.style(buildStylesheet(activeStage));
+  });
+}, [activeStage, granularity]);
 
   return (
     <div style={{ background:"#030712", width:"100%", height:"100%", position:"relative" }}>
